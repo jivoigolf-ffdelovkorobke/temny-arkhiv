@@ -9,33 +9,43 @@ permissions:
 jobs:
   post:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg espeak-ng fonts-dejavu-core
       - run: pip install -r requirements.txt
-      - run: |
-          set -o pipefail
-          ARGS=""; [ -n "$IG_ACCESS_TOKEN" ] && ARGS="--post"
-          python make_reel.py $ARGS 2>&1 | tee run.log || FAIL=1
-          sed -i "s#${IG_ACCESS_TOKEN:-@@none@@}#***#g" run.log
-          if [ -n "$FAIL" ]; then
-            mkdir -p logs && tail -c 4000 run.log > logs/last_error.log
-            git config user.name bot && git config user.email bot@users.noreply.github.com
-            git add logs && git commit -qm "error log" && git push -q || true
-            exit 1
-          fi
-          echo "::notice::$(grep -E '^(!|готово|опубликовано)' run.log | tr '\n' '|')"
+      - name: build and post
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -o pipefail
+          git config --global user.name bot && git config --global user.email bot@users.noreply.github.com
+          run() {
+            python make_reel.py || return 1
+            [ -z "$IG_ACCESS_TOKEN" ] && return 0
+            D=$(cat out/latest.txt); NAME="reel_$(basename $D).mp4"
+            # ролик на ветку media -> GitHub Pages (публичная ссылка для Instagram)
+            mkdir -p /tmp/media && cp $D/reel.mp4 /tmp/media/$NAME && touch /tmp/media/.nojekyll
+            ( cd /tmp/media && git init -q -b media && git add -A && git commit -qm media &&
+              git push -qf "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" media ) || return 1
+            OWNER=${GITHUB_REPOSITORY%%/*}; REPO=${GITHUB_REPOSITORY#*/}
+            python post_instagram.py "https://${OWNER,,}.github.io/${REPO}/${NAME}" $D/caption.txt
+          }
+          run 2>&1 | tee run.log || FAIL=1
+          sed -i "s#${IG_ACCESS_TOKEN:-@@none@@}#***#g" run.log
+          echo "::notice::$(grep -E '^(!|готово|опубликовано|не публикую)' run.log | tr '\n' '|')"
+          if [ -n "$FAIL" ]; then
+            mkdir -p logs && tail -c 4000 run.log > logs/last_error.log
+            git add logs && git commit -qm "error log" && git push -q || true
+            exit 1
+          fi
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: reel
           path: out/*/reel.mp4
       - name: save topic history
-        run: |
-          git config user.name bot && git config user.email bot@users.noreply.github.com
-          git add history.json && git commit -m "history" && git push || true
+        run: git add history.json && git commit -m "history" && git push || true

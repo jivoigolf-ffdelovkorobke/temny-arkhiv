@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Тёмный архив: сценарий -> озвучка -> видео 9:16 -> субтитры -> (опц.) публикация.
-Запуск: python make_reel.py [--post] [--topic "..."]"""
+Запуск: python make_reel.py [--topic "..."]; публикация — post_instagram.py (см. workflow)."""
 import argparse, asyncio, json, os, random, re, subprocess, sys, time, urllib.parse
 from pathlib import Path
 import requests
 from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).parent
+FALLBACKS = []  # что пришлось заменить заглушкой; с заглушками не публикуем
 OUT = ROOT / "out"
 W, H, FPS = 1080, 1920, 30
 FONT = "DejaVu Sans"
@@ -123,11 +124,17 @@ async def _edge(text, mp3, voice):
 
 def voiceover(text, d):
     mp3 = d / "voice.mp3"
-    try:
-        words = asyncio.run(_edge(text, mp3, os.getenv("VOICE", "ru-RU-DmitryNeural")))
-        if not words: raise RuntimeError("пустой ответ")
-    except Exception as e:  # офлайн-запасной вариант
-        print(f"! edge-tts недоступен ({type(e).__name__}) — espeak-ng")
+    words = None
+    for attempt in range(4):
+        try:
+            words = asyncio.run(_edge(text, mp3, os.getenv("VOICE", "ru-RU-DmitryNeural")))
+            if words: break
+        except Exception as e:
+            print(f"! edge-tts: {type(e).__name__}, попытка {attempt + 1}")
+        time.sleep(10 * (attempt + 1))
+    if not words:  # офлайн-запасной вариант
+        print("! edge-tts недоступен — espeak-ng")
+        FALLBACKS.append("voice")
         wav = d / "voice.wav"
         run(["espeak-ng", "-v", "ru", "-s", "150", "-p", "30", "-w", str(wav), text])
         run(["ffmpeg", "-y", "-i", str(wav), str(mp3)])
@@ -181,7 +188,12 @@ def image(prompt, path, seed):
     try:
         if prov == "pollinations":
             url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(full)}?width={W}&height={H}&nologo=true&seed={seed}"
-            r = requests.get(url, timeout=120); r.raise_for_status(); path.write_bytes(r.content)
+            for attempt in range(4):
+                r = requests.get(url, timeout=180)
+                if r.ok: break
+                print(f"! картинка: HTTP {r.status_code} {r.text[:120]}")
+                time.sleep(30)
+            r.raise_for_status(); path.write_bytes(r.content)
         elif prov == "openai":
             r = requests.post("https://api.openai.com/v1/images/generations", timeout=180,
                               headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
@@ -193,6 +205,7 @@ def image(prompt, path, seed):
         Image.open(path).convert("RGB").resize((W, H)).save(path)
     except Exception as e:
         print(f"! картинка через {prov} не вышла ({type(e).__name__}) — заглушка")
+        FALLBACKS.append("image")
         procedural(path, seed)
 
 # ---------- 5. Сборка ----------
@@ -227,16 +240,16 @@ def build(script, d):
 
 def main():
     load_env()
-    ap = argparse.ArgumentParser(); ap.add_argument("--post", action="store_true"); ap.add_argument("--topic"); ap.add_argument("--test", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--topic"); ap.add_argument("--test", action="store_true")
     a = ap.parse_args()
     script = write_script(a.topic, a.test)
     d = OUT / time.strftime("%Y%m%d_%H%M%S"); d.mkdir(parents=True)
     (d / "script.json").write_text(json.dumps(script, ensure_ascii=False, indent=1))
     out = build(script, d)
     print("готово:", out)
-    if a.post:
-        from post_instagram import publish
-        print("опубликовано, id:", publish(out, (d / "caption.txt").read_text()))
+    if FALLBACKS:
+        raise SystemExit(f"не публикую: заглушки вместо {sorted(set(FALLBACKS))}")
+    (ROOT / "out" / "latest.txt").write_text(str(d))
 
 if __name__ == "__main__":
     main()
