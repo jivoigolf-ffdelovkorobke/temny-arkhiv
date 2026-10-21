@@ -189,10 +189,13 @@ def image(prompt, path, seed):
         if prov == "pollinations":
             url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(full)}?width={W}&height={H}&nologo=true&seed={seed}"
             for attempt in range(4):
-                r = requests.get(url, timeout=180)
+                time.sleep(50)  # бесплатный лимит Pollinations: 1 картинка в 45 с
+                try:
+                    r = requests.get(url, timeout=300)
+                except requests.RequestException as e:
+                    print(f"! картинка: {type(e).__name__}"); continue
                 if r.ok: break
                 print(f"! картинка: HTTP {r.status_code} {r.text[:120]}")
-                time.sleep(30)
             r.raise_for_status(); path.write_bytes(r.content)
         elif prov == "openai":
             r = requests.post("https://api.openai.com/v1/images/generations", timeout=180,
@@ -205,8 +208,12 @@ def image(prompt, path, seed):
         Image.open(path).convert("RGB").resize((W, H)).save(path)
     except Exception as e:
         print(f"! картинка через {prov} не вышла ({type(e).__name__}) — заглушка")
-        FALLBACKS.append("image")
-        procedural(path, seed)
+        good = [p for p in sorted(path.parent.glob("s*.jpg")) if p != path and p.stat().st_size > 50_000]
+        if good:  # повторяем удачную картинку соседней сцены вместо заглушки
+            path.write_bytes(good[-1].read_bytes())
+        else:
+            FALLBACKS.append("image")
+            procedural(path, seed)
 
 # ---------- 5. Сборка ----------
 def build(script, d):
