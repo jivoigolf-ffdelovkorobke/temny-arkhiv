@@ -58,23 +58,29 @@ def _llm(prompt):
     if os.getenv("GITHUB_TOKEN"):
         tries.append(("GitHub Models", lambda: requests.post(
             "https://models.github.ai/inference/chat/completions", timeout=120,
-            headers={"Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}"},
+            headers={"Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}", "Accept": "application/json",
+                     "Content-Type": "application/json", "X-GitHub-Api-Version": "2022-11-28"},
             json={"model": "openai/gpt-4.1-mini", "messages": msgs})))
     if os.getenv("GEMINI_API_KEY"):
         tries.append(("Gemini", lambda: requests.post(
             "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", timeout=120,
             headers={"Authorization": f"Bearer {os.environ['GEMINI_API_KEY']}"},
             json={"model": "gemini-2.5-flash", "messages": msgs})))
-    tries.append(("Pollinations", lambda: requests.post(
-        "https://text.pollinations.ai/openai", timeout=180,
-        json={"model": "openai", "messages": msgs, "seed": random.randint(1, 10**6)})))
-    for attempt in range(2):
+    for model in ("mistral", "openai"):
+        tries.append((f"Pollinations/{model}", lambda model=model: requests.post(
+            "https://text.pollinations.ai/openai", timeout=180,
+            json={"model": model, "messages": msgs, "max_tokens": 4000, "seed": random.randint(1, 10**6)})))
+    for attempt in range(3):
         for name, call in tries:
             try:
+                r = None
                 r = call()
-                return r.json()["choices"][0]["message"]["content"]
+                text = r.json()["choices"][0]["message"].get("content") or ""
+                if "{" in text:
+                    return text
+                raise ValueError("нет JSON в ответе")
             except Exception as e:
-                body = r.text[:300] if "r" in locals() else ""
+                body = f"HTTP {r.status_code} {r.text[:200]}" if r is not None else ""
                 print(f"! {name}: {type(e).__name__} {body}")
         time.sleep(15)
     raise RuntimeError("не удалось получить сценарий")
@@ -85,9 +91,16 @@ def write_script(topic=None, test=False):
     if test:
         return FALLBACK
     genre = topic or ("хоррор" if random.random() < 0.6 else "тру-крайм")
-    text = _llm(RULES.format(genre=genre, used=", ".join(used[-60:]) or "нет"))
-    data = json.loads(text[text.find("{"): text.rfind("}") + 1])
-    assert data["narration"] and len(data["scenes"]) >= 3
+    for attempt in range(3):
+        text = _llm(RULES.format(genre=genre, used=", ".join(used[-60:]) or "нет"))
+        try:
+            data = json.loads(text[text.find("{"): text.rfind("}") + 1])
+            assert data["narration"] and len(data["scenes"]) >= 3 and data["hashtags"]
+            break
+        except Exception as e:
+            print(f"! кривой сценарий ({type(e).__name__}), заново")
+    else:
+        raise RuntimeError("сценарий не разобрался")
     used.append(data["title"])
     hist_f.write_text(json.dumps(used, ensure_ascii=False, indent=1))
     return data
