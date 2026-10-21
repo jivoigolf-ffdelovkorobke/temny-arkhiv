@@ -1,24 +1,19 @@
 ! GitHub Models: JSONDecodeError HTTP 200 OK
 
-! Pollinations/mistral: KeyError HTTP 404 {"status":404,"success":false,"error":{"code":"NOT_FOUND","message":"Model \"mistral\" isn't on the Classic API. Free models: https://text.pollinations.ai/models. Every model we offer is on https://en
-! Pollinations/openai: KeyError HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 reply every 30 seconds per IP. Retry after 30s, or get unlimited replies with a pollen key at https://enter.
-! GitHub Models: JSONDecodeError HTTP 200 OK
-
-! Pollinations/mistral: KeyError HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 reply every 30 seconds per IP. Retry after 15s, or get unlimited replies with a pollen key at https://enter.
-! Pollinations/openai: KeyError HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 reply every 30 seconds per IP. Retry after 14s, or get unlimited replies with a pollen key at https://enter.
-! GitHub Models: JSONDecodeError HTTP 200 OK
-
-! Pollinations/mistral: KeyError HTTP 404 {"status":404,"success":false,"error":{"code":"NOT_FOUND","message":"Model \"mistral\" isn't on the Classic API. Free models: https://text.pollinations.ai/models. Every model we offer is on https://en
-! Pollinations/openai: KeyError HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 reply every 30 seconds per IP. Retry after 30s, or get unlimited replies with a pollen key at https://enter.
+! GitHub Models (azure): ConnectionError 
+! edge-tts недоступен (NoAudioReceived) — espeak-ng
+! картинка через pollinations не вышла (HTTPError) — заглушка
+! картинка через pollinations не вышла (HTTPError) — заглушка
+! картинка через pollinations не вышла (HTTPError) — заглушка
+готово: /home/runner/work/temny-arkhiv/temny-arkhiv/out/20261021_202122/reel.mp4
 Traceback (most recent call last):
-  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 240, in <module>
+  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 242, in <module>
     main()
     ~~~~^^
-  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 230, in main
-    script = write_script(a.topic, a.test)
-  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 95, in write_script
-    text = _llm(RULES.format(genre=genre, used=", ".join(used[-60:]) or "нет"))
-           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 86, in _llm
-    raise RuntimeError("не удалось получить сценарий")
-RuntimeError: не удалось получить сценарий
+  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 239, in main
+    print("опубликовано, id:", publish(out, (d / "caption.txt").read_text()))
+                               ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/temny-arkhiv/temny-arkhiv/post_instagram.py", line 21, in publish
+    if "id" not in c: raise RuntimeError(c)
+                      ^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: {'error': {'message': 'The parameter video_url is required', 'type': 'IGApiException', 'code': 100, 'fbtrace_id': 'A8Xznax9EIf1bFNifWqUSkM'}}
