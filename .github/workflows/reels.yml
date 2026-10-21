@@ -17,7 +17,14 @@ jobs:
       - run: |
           set -o pipefail
           ARGS=""; [ -n "$IG_ACCESS_TOKEN" ] && ARGS="--post"
-          python make_reel.py $ARGS 2>&1 | tee run.log || { echo "::error::$(tail -c 2500 run.log | tr '\n' '|')"; exit 1; }
+          python make_reel.py $ARGS 2>&1 | tee run.log || FAIL=1
+          sed -i "s#${IG_ACCESS_TOKEN:-@@none@@}#***#g" run.log
+          if [ -n "$FAIL" ]; then
+            mkdir -p logs && tail -c 4000 run.log > logs/last_error.log
+            git config user.name bot && git config user.email bot@users.noreply.github.com
+            git add logs && git commit -qm "error log" && git push -q || true
+            exit 1
+          fi
           echo "::notice::$(grep -E '^(!|готово|опубликовано)' run.log | tr '\n' '|')"
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
