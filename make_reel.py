@@ -52,26 +52,31 @@ FALLBACK = {
 }
 
 def _llm(prompt):
-    """Бесплатно: Pollinations (без ключа). Если задан GEMINI_API_KEY (бесплатный) — сначала Gemini."""
+    """Бесплатные источники по очереди: GitHub Models (токен Actions), Gemini (бесплатный ключ), Pollinations."""
+    msgs = [{"role": "user", "content": prompt}]
+    tries = []
+    if os.getenv("GITHUB_TOKEN"):
+        tries.append(("GitHub Models", lambda: requests.post(
+            "https://models.github.ai/inference/chat/completions", timeout=120,
+            headers={"Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}"},
+            json={"model": "openai/gpt-4.1-mini", "messages": msgs})))
     if os.getenv("GEMINI_API_KEY"):
-        try:
-            r = requests.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
-                              params={"key": os.environ["GEMINI_API_KEY"]}, timeout=120,
-                              json={"contents": [{"parts": [{"text": prompt}]}]})
-            r.raise_for_status()
-            return r.json()["candidates"][0]["content"]["parts"][0]["text"]
-        except Exception as e:
-            print(f"! Gemini: {type(e).__name__}, пробую Pollinations")
-    for attempt in range(3):
-        try:
-            r = requests.post("https://text.pollinations.ai/openai", timeout=180,
-                              json={"model": "openai", "messages": [{"role": "user", "content": prompt}],
-                                    "seed": random.randint(1, 10**6)})
-            r.raise_for_status()
-            return r.json()["choices"][0]["message"]["content"]
-        except Exception as e:
-            print(f"! Pollinations: {type(e).__name__}, попытка {attempt + 1}")
-            time.sleep(20)
+        tries.append(("Gemini", lambda: requests.post(
+            "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", timeout=120,
+            headers={"Authorization": f"Bearer {os.environ['GEMINI_API_KEY']}"},
+            json={"model": "gemini-2.5-flash", "messages": msgs})))
+    tries.append(("Pollinations", lambda: requests.post(
+        "https://text.pollinations.ai/openai", timeout=180,
+        json={"model": "openai", "messages": msgs, "seed": random.randint(1, 10**6)})))
+    for attempt in range(2):
+        for name, call in tries:
+            try:
+                r = call()
+                return r.json()["choices"][0]["message"]["content"]
+            except Exception as e:
+                body = r.text[:300] if "r" in locals() else ""
+                print(f"! {name}: {type(e).__name__} {body}")
+        time.sleep(15)
     raise RuntimeError("не удалось получить сценарий")
 
 def write_script(topic=None, test=False):
