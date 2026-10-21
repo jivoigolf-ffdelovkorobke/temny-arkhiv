@@ -56,20 +56,22 @@ def _llm(prompt):
     msgs = [{"role": "user", "content": prompt}]
     tries = []
     if os.getenv("GITHUB_TOKEN"):
+        gh = {"Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}", "Accept": "application/json"}
         tries.append(("GitHub Models", lambda: requests.post(
-            "https://models.github.ai/inference/chat/completions", timeout=120,
-            headers={"Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}", "Accept": "application/json",
-                     "Content-Type": "application/json", "X-GitHub-Api-Version": "2022-11-28"},
+            "https://models.github.ai/inference/chat/completions", timeout=120, headers=gh,
             json={"model": "openai/gpt-4.1-mini", "messages": msgs})))
+        tries.append(("GitHub Models (azure)", lambda: requests.post(
+            "https://models.inference.ai.azure.com/chat/completions", timeout=120, headers=gh,
+            json={"model": "gpt-4o-mini", "messages": msgs})))
     if os.getenv("GEMINI_API_KEY"):
         tries.append(("Gemini", lambda: requests.post(
             "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", timeout=120,
             headers={"Authorization": f"Bearer {os.environ['GEMINI_API_KEY']}"},
             json={"model": "gemini-2.5-flash", "messages": msgs})))
-    for model in ("mistral", "openai"):
-        tries.append((f"Pollinations/{model}", lambda model=model: requests.post(
-            "https://text.pollinations.ai/openai", timeout=180,
-            json={"model": model, "messages": msgs, "max_tokens": 4000, "seed": random.randint(1, 10**6)})))
+    tries.append(("Pollinations", lambda: requests.post(
+        "https://text.pollinations.ai/openai", timeout=180,
+        json={"model": "openai", "messages": msgs, "max_tokens": 6000, "reasoning_effort": "low",
+              "seed": random.randint(1, 10**6)})))
     for attempt in range(3):
         for name, call in tries:
             try:
@@ -82,7 +84,7 @@ def _llm(prompt):
             except Exception as e:
                 body = f"HTTP {r.status_code} {r.text[:200]}" if r is not None else ""
                 print(f"! {name}: {type(e).__name__} {body}")
-        time.sleep(15)
+        time.sleep(35)  # бесплатный лимит Pollinations: 1 ответ в 30 с
     raise RuntimeError("не удалось получить сценарий")
 
 def write_script(topic=None, test=False):
