@@ -36,7 +36,7 @@ jobs:
           }
           run 2>&1 | tee run.log || FAIL=1
           sed -i "s#${IG_ACCESS_TOKEN:-@@none@@}#***#g" run.log
-          echo "::notice::$(grep -E '^(!|готово|опубликовано|не публикую)' run.log | tr '\n' '|')"
+          grep -E '^(готово|опубликовано|не публикую|!)' run.log | head -20 | while read -r l; do echo "::notice::$l"; done
           if [ -n "$FAIL" ]; then
             mkdir -p logs && tail -c 4000 run.log > logs/last_error.log
             git add logs && git commit -qm "error log" && git push -q || true
