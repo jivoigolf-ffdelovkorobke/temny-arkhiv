@@ -1,18 +1,24 @@
-! GitHub Models: JSONDecodeError OK
+! GitHub Models: JSONDecodeError HTTP 200 OK
 
-! Pollinations: KeyError {"id":"pllns_7afb9a954624856112025d1d8ded4198","choices":[{"index":0,"message":{"role":"assistant","reasoning":"We need to craft a JSON with fields: title, narration, scenes (array of 4-6 English prompts for images, dark cinematic atmosphere, no real faces or blood), caption (1-2 sentence tagline), 
-! GitHub Models: JSONDecodeError OK
+! Pollinations/mistral: KeyError HTTP 404 {"status":404,"success":false,"error":{"code":"NOT_FOUND","message":"Model \"mistral\" isn't on the Classic API. Free models: https://text.pollinations.ai/models. Every model we offer is on https://en
+! Pollinations/openai: KeyError HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 reply every 30 seconds per IP. Retry after 30s, or get unlimited replies with a pollen key at https://enter.
+! GitHub Models: JSONDecodeError HTTP 200 OK
 
-! Pollinations: KeyError {"id":"pllns_985c46160b4ead5c2a761bab6816aa68","choices":[{"index":0,"message":{"role":"assistant","reasoning":"We need to produce a JSON with fields: title, narration, scenes, caption, hashtags. Provide a horror short script for Reels channel \"Тёмный архив\". The narration length 55-85 words. It s
+! Pollinations/mistral: KeyError HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 reply every 30 seconds per IP. Retry after 15s, or get unlimited replies with a pollen key at https://enter.
+! Pollinations/openai: KeyError HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 reply every 30 seconds per IP. Retry after 14s, or get unlimited replies with a pollen key at https://enter.
+! GitHub Models: JSONDecodeError HTTP 200 OK
+
+! Pollinations/mistral: KeyError HTTP 404 {"status":404,"success":false,"error":{"code":"NOT_FOUND","message":"Model \"mistral\" isn't on the Classic API. Free models: https://text.pollinations.ai/models. Every model we offer is on https://en
+! Pollinations/openai: KeyError HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 reply every 30 seconds per IP. Retry after 30s, or get unlimited replies with a pollen key at https://enter.
 Traceback (most recent call last):
-  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 227, in <module>
+  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 240, in <module>
     main()
     ~~~~^^
-  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 217, in main
+  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 230, in main
     script = write_script(a.topic, a.test)
-  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 88, in write_script
+  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 95, in write_script
     text = _llm(RULES.format(genre=genre, used=", ".join(used[-60:]) or "нет"))
            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 80, in _llm
+  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 86, in _llm
     raise RuntimeError("не удалось получить сценарий")
 RuntimeError: не удалось получить сценарий
