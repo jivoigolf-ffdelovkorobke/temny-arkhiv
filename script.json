@@ -1,0 +1,67 @@
+{
+ "title": "Это не мама",
+ "hook": "Не открывай дверь",
+ "genre": "хоррор",
+ "narration": "Ей было семнадцать, родители уехали на дачу. В полночь в дверь позвонили. «Доча, открой, это мама, ключи забыла». Голос был мамин, точно. Она уже взялась за замок, но телефон завибрировал. Сообщение от мамы: «Мы с папой остались ночевать, не жди». Она посмотрела в глазок. На площадке никого. Но голос за дверью ласково повторил: «Открой. Я же вижу, что ты смотришь». Звонки продолжались до рассвета. А утром на двери нашли царапины. Изнутри квартиры.",
+ "character": "teenage girl with long dark hair in an oversized grey hoodie",
+ "scenes": [
+  {
+   "prompt": "dark apartment hallway at midnight, front door with peephole, warm lamp light from the kitchen, wide shot",
+   "character": false,
+   "scare": false
+  },
+  {
+   "prompt": "teenage girl on a sofa looking toward the door, startled, phone glowing in her hand",
+   "character": true,
+   "scare": false
+  },
+  {
+   "prompt": "close-up of a hand reaching for a door lock, dim warm light",
+   "character": true,
+   "scare": false
+  },
+  {
+   "prompt": "close-up of a smartphone screen glowing in the dark with a new message notification",
+   "character": false,
+   "scare": false
+  },
+  {
+   "prompt": "extreme close-up of an eye looking through a door peephole, cold light",
+   "character": true,
+   "scare": false
+  },
+  {
+   "prompt": "fish-eye view through a peephole of an empty stairwell landing, flickering fluorescent lamp, green tint",
+   "character": false,
+   "scare": false
+  },
+  {
+   "prompt": "pale thin hand pressed flat against the outside of an apartment door in a dark stairwell",
+   "character": false,
+   "scare": true
+  },
+  {
+   "prompt": "girl sitting on the floor hugging her knees in a dark hallway, door in the background, dawn light",
+   "character": true,
+   "scare": false
+  },
+  {
+   "prompt": "close-up of deep scratch marks on the inner side of a wooden apartment door, morning light",
+   "character": false,
+   "scare": false
+  }
+ ],
+ "caption": "Голос был мамин. Вот только мама была за сто километров. Открыли бы? 👇",
+ "hashtags": [
+  "страшныеистории",
+  "хоррор",
+  "крипипаста",
+  "мистика",
+  "тёмныйархив",
+  "ужасы",
+  "страшно",
+  "reels",
+  "истории",
+  "нечисть"
+ ]
+}
