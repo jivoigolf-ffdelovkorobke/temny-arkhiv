@@ -137,7 +137,7 @@ def write_script(topic=None, test=False):
 async def _edge(text, mp3, voice):
     import edge_tts
     words = []
-    com = edge_tts.Communicate(text, voice, rate="-5%", pitch="-8Hz", boundary="WordBoundary",
+    com = edge_tts.Communicate(text, voice, rate="+6%", pitch="-8Hz", boundary="WordBoundary",
                                proxy=os.getenv("HTTPS_PROXY") or None)
     with open(mp3, "wb") as f:
         async for ch in com.stream():
