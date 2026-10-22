@@ -28,13 +28,25 @@ def duration(path):
                                           "-of", "csv=p=0", str(path)]).strip())
 
 # ---------- 1. Сценарий ----------
-RULES = """Ты сценарист Reels-канала «Тёмный архив» (русский язык).
-Жанр: {genre}. Длина текста озвучки: 55-85 слов (20-35 секунд).
+CASES = ["Перевал Дятлова", "Дело Тамам Шуд (Сомертонский человек)", "Исчезновение экипажа «Марии Селесты»",
+         "Зодиак", "Чёрный Георгин", "Ди Би Купер", "Исчезновение Элизы Лэм в отеле «Сесил»", "Убийства в Хинтеркайфеке",
+         "Маяк на островах Фланнан", "Человек из Исдален", "Похищение «Моны Лизы» в 1911 году", "Джек-потрошитель",
+         "Исчезновение Амелии Эрхарт", "Дело о «Таинственном пассажире» рейса 19", "Тайна Оук-Айленда",
+         "Дом Винчестеров", "Убийство Боба Крейна", "Исчезновение Джимми Хоффы", "Ограбление музея Гарднер",
+         "Ватиканское исчезновение Эмануэлы Орланди"]
+
+RULES = """Ты лучший сценарист вирусных Reels-канала «Тёмный архив» (русский язык).
+Жанр: {genre}. {theme}
+Текст озвучки: 70-90 слов (30-35 секунд), живой разговорный русский, грамотно, короткие фразы, каждая фраза — новая деталь или поворот. Без воды и пафоса («сегодня мы раскроем…» — запрещено). Начинай сразу с действия или факта.
+Пример уровня текста: «В две тысячи восьмом году молодая мать услышала в радионяне мужской голос. Он тихо напевал колыбельную её спящему сыну. Она вбежала в детскую — никого. Окна закрыты, дверь заперта изнутри. А через неделю голос вернулся и сказал всего одну фразу: «Я всё ещё здесь».»
 Структура: первая фраза — крючок, цепляет за 2 секунды; дальше нарастание; финал — твист или вопрос, побуждающий подписаться/комментировать.
-Тру-крайм: только старые широко известные дела, факты без выдумок, без жестоких подробностей, никаких несовершеннолетних жертв, фокус на загадке и расследовании.
+Тру-крайм: только указанное дело, только общеизвестные факты (даты, место, что нашли), ничего не выдумывай, без жестоких подробностей, никаких несовершеннолетних жертв, фокус на загадке и расследовании.
 Хоррор: оригинальная крипипаста или городская легенда, атмосфера, без натурализма.
 Не повторяй темы: {used}.
-Верни ТОЛЬКО JSON: {{"title": "...", "narration": "...", "scenes": ["4-6 англ. промптов для картинок: тёмная кинематографичная атмосфера, без лиц реальных людей, без крови"], "caption": "подпись 1-2 предложения", "hashtags": ["8-12 тегов без #"]}}"""
+Визуал: 9-11 сцен, по одной на каждые 2-3 секунды текста, строго по порядку событий. Каждая сцена — конкретный кадр на английском: место, действие, ракурс (close-up / wide shot / low angle / POV), свет. Без крови, без реальных лиц. Ровно 1 сцена со "scare": true — самый жуткий момент (лицо в окне, фигура в темноте и т.п.).
+Если есть главный герой — опиши его внешность один раз в "character" (англ., одежда, возраст, причёска), а в сценах с ним ставь "character": true.
+"hook" — 3-5 слов для экрана в первую секунду, интрига без спойлера.
+Верни ТОЛЬКО JSON: {{"title": "...", "hook": "...", "narration": "...", "character": "...", "scenes": [{{"prompt": "...", "character": false, "scare": false}}], "caption": "подпись 1-2 предложения", "hashtags": ["8-12 тегов без #"]}}"""
 
 FALLBACK = {
     "title": "Голос в радионяне",
@@ -92,13 +104,26 @@ def write_script(topic=None, test=False):
     hist_f = ROOT / "history.json"
     used = json.loads(hist_f.read_text()) if hist_f.exists() else []
     if test:
-        return FALLBACK
+        return dict(FALLBACK, scenes=[{"prompt": x, "scare": i == 3} for i, x in enumerate(FALLBACK["scenes"])],
+                    hook="Голос в радионяне")
+    bank_f = ROOT / "scripts_bank.json"  # готовые выверенные сценарии идут первыми
+    if bank_f.exists() and not topic:
+        for b in json.loads(bank_f.read_text()):
+            if b["title"] not in used:
+                used.append(b["title"])
+                hist_f.write_text(json.dumps(used, ensure_ascii=False, indent=1))
+                return b
     genre = topic or ("хоррор" if random.random() < 0.6 else "тру-крайм")
+    theme = ""
+    if genre == "тру-крайм":
+        fresh = [c for c in CASES if not any(c.split()[-1].strip("«»()") in u for u in used)] or CASES
+        theme = f"Дело: {random.choice(fresh)}. В title — название дела."
     for attempt in range(3):
-        text = _llm(RULES.format(genre=genre, used=", ".join(used[-60:]) or "нет"))
+        text = _llm(RULES.format(genre=genre, theme=theme, used=", ".join(used[-60:]) or "нет"))
         try:
             data = json.loads(text[text.find("{"): text.rfind("}") + 1])
-            assert data["narration"] and len(data["scenes"]) >= 3 and data["hashtags"]
+            data["scenes"] = [x if isinstance(x, dict) else {"prompt": x} for x in data["scenes"]][:12]
+            assert 55 <= len(data["narration"].split()) <= 110 and len(data["scenes"]) >= 6 and data["hashtags"]
             break
         except Exception as e:
             print(f"! кривой сценарий ({type(e).__name__}), заново")
@@ -112,7 +137,7 @@ def write_script(topic=None, test=False):
 async def _edge(text, mp3, voice):
     import edge_tts
     words = []
-    com = edge_tts.Communicate(text, voice, rate="-5%", pitch="-8Hz", boundary="WordBoundary",
+    com = edge_tts.Communicate(text, voice, rate="+6%", pitch="-8Hz", boundary="WordBoundary",
                                proxy=os.getenv("HTTPS_PROXY") or None)
     with open(mp3, "wb") as f:
         async for ch in com.stream():
@@ -182,13 +207,13 @@ def procedural(path, seed):
         dr.ellipse([x - r, y - r, x + r, y + r], fill=tuple(min(255, v + rnd.randint(0, 25)) for v in c))
     img.filter(ImageFilter.GaussianBlur(120)).save(path)
 
-def image(prompt, path, seed):
+def image(prompt, path, seed, suffix=", dark cinematic horror photo, film grain, low key lighting, vertical 9:16, no text"):
     prov = os.getenv("IMAGE_PROVIDER", "pollinations")
-    full = prompt + ", dark cinematic horror photo, film grain, low key lighting, vertical 9:16, no text"
+    full = prompt + suffix
     try:
         if prov == "pollinations":
             url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(full)}?width={W}&height={H}&nologo=true&seed={seed}"
-            for attempt in range(4):
+            for attempt in range(7):
                 time.sleep(50)  # бесплатный лимит Pollinations: 1 картинка в 45 с
                 try:
                     r = requests.get(url, timeout=300)
@@ -205,7 +230,8 @@ def image(prompt, path, seed):
             import base64; path.write_bytes(base64.b64decode(r.json()["data"][0]["b64_json"]))
         else:
             raise RuntimeError("off")
-        Image.open(path).convert("RGB").resize((W, H)).save(path)
+        im = Image.open(path).convert("RGB")
+        im.crop((0, 0, im.width, int(im.height * 0.94))).resize((W, H), Image.LANCZOS).save(path)  # без водяного знака внизу
     except Exception as e:
         print(f"! картинка через {prov} не вышла ({type(e).__name__}) — заглушка")
         good = [p for p in sorted(path.parent.glob("s*.jpg")) if p != path and p.stat().st_size > 50_000]
@@ -252,7 +278,12 @@ def main():
     script = write_script(a.topic, a.test)
     d = OUT / time.strftime("%Y%m%d_%H%M%S"); d.mkdir(parents=True)
     (d / "script.json").write_text(json.dumps(script, ensure_ascii=False, indent=1))
-    out = build(script, d)
+    if os.getenv("STYLE", "anim") == "anim":
+        import anim
+        out = anim.build(script, d, sys.modules[__name__])
+    else:
+        script["scenes"] = [x["prompt"] for x in script["scenes"]][:6]
+        out = build(script, d)
     print("готово:", out)
     if FALLBACKS:
         raise SystemExit(f"не публикую: заглушки вместо {sorted(set(FALLBACKS))}")
