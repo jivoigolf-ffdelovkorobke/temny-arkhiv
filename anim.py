@@ -5,9 +5,9 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
 W, H, FPS = 1080, 1920, 30
-STYLE = (", 2D animated horror film still, detailed digital painting, cinematic composition, volumetric light, "
-         "fog, deep teal and blue shadows with warm amber light accents, high contrast, eerie atmosphere, "
-         "highly detailed background, vertical 9:16 frame, no text, no watermark")
+STYLE = (", dark atmospheric horror illustration, detailed digital painting, cinematic animated film still, "
+         "volumetric god rays, light fog, rich colors, warm candle and lamp light against cold moonlight, "
+         "dramatic contrast, sharp focus, highly detailed, vertical 9:16, no text")
 FONT = "DejaVu Sans"
 
 def ease(x):
@@ -22,7 +22,7 @@ def grade(img):
     shadow = np.array([0.80, 0.95, 1.10], np.float32)
     high = np.array([1.08, 1.0, 0.88], np.float32)
     a = a * (shadow * (1 - lum) + high * lum)
-    a = np.clip((a - 0.5) * 1.15 + 0.47, 0, 1) ** 1.1
+    a = np.clip((a - 0.5) * 1.12 + 0.52, 0, 1) ** 0.92
     return Image.fromarray((a * 255).astype(np.uint8))
 
 def motion(rng, scare):
@@ -50,8 +50,8 @@ class Atmos:
         self.fog = np.asarray(fog.filter(ImageFilter.GaussianBlur(18)), np.float32) / 255
         yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
         rr = np.hypot((xx - W / 2) / (W / 2), (yy - H / 2) / (H / 2))
-        self.vig = np.clip(1 - 0.5 * rr ** 2.4, 0.2, 1)[..., None]
-        self.grain = [self.r.normal(0, 7, (H // 2, W // 2)).astype(np.float32).repeat(2, 0).repeat(2, 1)[..., None]
+        self.vig = np.clip(1 - 0.35 * rr ** 2.6, 0.3, 1)[..., None]
+        self.grain = [self.r.normal(0, 5, (H // 2, W // 2)).astype(np.float32).repeat(2, 0).repeat(2, 1)[..., None]
                       for _ in range(8)]
         self.dust = [[self.r.uniform(0, W), self.r.uniform(0, H), self.r.uniform(1.5, 4.5), self.r.uniform(-0.4, 0.4),
                       self.r.uniform(-1.2, -0.2), self.r.uniform(0.2, 0.7)] for _ in range(45)]
@@ -67,7 +67,7 @@ class Atmos:
         off = int(t * 18) % 540                               # туман медленно ползёт
         fog = np.roll(self.fog, -off, 1)[:, :270]
         fog = np.asarray(Image.fromarray((fog * 255).astype(np.uint8)).resize((W, H), Image.BILINEAR), np.float32)
-        fog = (fog / 255)[..., None] * np.linspace(0.05, 0.32, H, dtype=np.float32)[:, None, None]
+        fog = (fog / 255)[..., None] * np.linspace(0.03, 0.22, H, dtype=np.float32)[:, None, None]
         a = a + (210 - a) * fog * np.array([0.85, 0.95, 1.0], np.float32)
         flick = 1.0 if self.r.random() > 0.04 else self.r.uniform(0.75, 0.9)
         a = (a * self.vig * flick) + self.grain[k % 8]
@@ -171,7 +171,7 @@ def build(script, d, mr):
          "-i", "-", "-i", str(mp3), "-i", str(d / "sfx.wav"), "-filter_complex",
          f"[0:v]ass={d / 'subs.ass'},format=yuv420p[v];[1:a]adelay=150|150,volume=1.7[vo];"
          f"[2:a]volume=0.9[fx];[vo][fx]amix=inputs=2:duration=longest:normalize=0,alimiter=limit=0.95[a]",
-         "-map", "[v]", "-map", "[a]", "-t", f"{total:.2f}", "-c:v", "libx264", "-preset", "medium", "-crf", "20",
+         "-map", "[v]", "-map", "[a]", "-t", f"{total:.2f}", "-c:v", "libx264", "-preset", "medium", "-crf", "23",
          "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(out)], stdin=subprocess.PIPE)
     rng = random.Random(len(script["narration"]))
     atm = Atmos(rng.randint(1, 999))
