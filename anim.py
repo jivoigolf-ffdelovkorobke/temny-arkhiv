@@ -171,7 +171,7 @@ def build(script, d, mr):
          "-i", "-", "-i", str(mp3), "-i", str(d / "sfx.wav"), "-filter_complex",
          f"[0:v]ass={d / 'subs.ass'},format=yuv420p[v];[1:a]adelay=150|150,volume=1.7[vo];"
          f"[2:a]volume=0.9[fx];[vo][fx]amix=inputs=2:duration=longest:normalize=0,alimiter=limit=0.95[a]",
-         "-map", "[v]", "-map", "[a]", "-t", f"{total:.2f}", "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+         "-map", "[v]", "-map", "[a]", "-t", f"{total:.2f}", "-c:v", "libx264", "-preset", "medium", "-crf", "23", "-maxrate", "9M", "-bufsize", "18M",
          "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(out)], stdin=subprocess.PIPE)
     rng = random.Random(len(script["narration"]))
     atm = Atmos(rng.randint(1, 999))
