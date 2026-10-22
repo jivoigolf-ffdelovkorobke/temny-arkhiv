@@ -1,18 +1,7 @@
-! GitHub Models: JSONDecodeError HTTP 200 OK
-
-! GitHub Models (azure): ConnectionError 
-! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
-! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
-! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
-! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
-! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
-! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
-! картинка: ReadTimeout
-готово: /home/runner/work/temny-arkhiv/temny-arkhiv/out/20261022_150519/reel.mp4
-remote: error: Trace: 25ff66196e4fe61393d6da739622daf6298432f665731e055aecd8309b040fe6        
-remote: error: See https://gh.io/lfs for more information.        
-remote: error: File reel.mp4 is 112.74 MB; this exceeds GitHub's file size limit of 100.00 MB        
-remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
-To https://github.com/jivoigolf-ffdelovkorobke/temny-arkhiv.git
- ! [remote rejected] preview -> preview (pre-receive hook declined)
-error: failed to push some refs to 'https://github.com/jivoigolf-ffdelovkorobke/temny-arkhiv.git'
+! edge-tts: NoAudioReceived, попытка 1
+! edge-tts: NoAudioReceived, попытка 2
+! edge-tts: NoAudioReceived, попытка 3
+! edge-tts: NoAudioReceived, попытка 4
+! edge-tts недоступен — espeak-ng
+готово: /home/runner/work/temny-arkhiv/temny-arkhiv/out/20261022_172317/reel.mp4
+не публикую: заглушки вместо ['voice']
