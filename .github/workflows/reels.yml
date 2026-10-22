@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: "0 6,12,17 * * *"   # 09:00, 15:00, 20:00 МСК
   workflow_dispatch:
+    inputs:
+      preview:
+        description: "только собрать ролик в ветку preview, не публиковать"
+        type: boolean
+        default: false
 permissions:
   contents: write
   models: read
@@ -20,11 +25,18 @@ jobs:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PREVIEW: ${{ inputs.preview }}
         run: |
           set -o pipefail
           git config --global user.name bot && git config --global user.email bot@users.noreply.github.com
           run() {
             python make_reel.py || return 1
+            if [ "$PREVIEW" = "true" ]; then  # ролик на ветку preview для проверки, без публикации
+              D=$(cat out/latest.txt); mkdir -p /tmp/pv && cp $D/reel.mp4 $D/script.json $D/s*.jpg /tmp/pv/
+              ( cd /tmp/pv && git init -q -b preview && git add -A && git commit -qm preview &&
+                git push -qf "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" preview )
+              return $?
+            fi
             [ -z "$IG_ACCESS_TOKEN" ] && return 0
             D=$(cat out/latest.txt); NAME="reel_$(basename $D).mp4"
             # ролик на ветку media -> GitHub Pages (публичная ссылка для Instagram)
@@ -48,4 +60,5 @@ jobs:
           name: reel
           path: out/*/reel.mp4
       - name: save topic history
+        if: ${{ !inputs.preview }}
         run: git add history.json && git commit -m "history" && git push || true

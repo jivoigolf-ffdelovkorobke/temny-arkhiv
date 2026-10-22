@@ -34,7 +34,10 @@ RULES = """Ты сценарист Reels-канала «Тёмный архив�
 Тру-крайм: только старые широко известные дела, факты без выдумок, без жестоких подробностей, никаких несовершеннолетних жертв, фокус на загадке и расследовании.
 Хоррор: оригинальная крипипаста или городская легенда, атмосфера, без натурализма.
 Не повторяй темы: {used}.
-Верни ТОЛЬКО JSON: {{"title": "...", "narration": "...", "scenes": ["4-6 англ. промптов для картинок: тёмная кинематографичная атмосфера, без лиц реальных людей, без крови"], "caption": "подпись 1-2 предложения", "hashtags": ["8-12 тегов без #"]}}"""
+Визуал: 9-11 сцен, по одной на каждые 2-3 секунды текста, строго по порядку событий. Каждая сцена — конкретный кадр на английском: место, действие, ракурс (close-up / wide shot / low angle / POV), свет. Без крови, без реальных лиц. Ровно 1 сцена со "scare": true — самый жуткий момент (лицо в окне, фигура в темноте и т.п.).
+Если есть главный герой — опиши его внешность один раз в "character" (англ., одежда, возраст, причёска), а в сценах с ним ставь "character": true.
+"hook" — 3-5 слов для экрана в первую секунду, интрига без спойлера.
+Верни ТОЛЬКО JSON: {{"title": "...", "hook": "...", "narration": "...", "character": "...", "scenes": [{{"prompt": "...", "character": false, "scare": false}}], "caption": "подпись 1-2 предложения", "hashtags": ["8-12 тегов без #"]}}"""
 
 FALLBACK = {
     "title": "Голос в радионяне",
@@ -92,13 +95,15 @@ def write_script(topic=None, test=False):
     hist_f = ROOT / "history.json"
     used = json.loads(hist_f.read_text()) if hist_f.exists() else []
     if test:
-        return FALLBACK
+        return dict(FALLBACK, scenes=[{"prompt": x, "scare": i == 3} for i, x in enumerate(FALLBACK["scenes"])],
+                    hook="Голос в радионяне")
     genre = topic or ("хоррор" if random.random() < 0.6 else "тру-крайм")
     for attempt in range(3):
         text = _llm(RULES.format(genre=genre, used=", ".join(used[-60:]) or "нет"))
         try:
             data = json.loads(text[text.find("{"): text.rfind("}") + 1])
-            assert data["narration"] and len(data["scenes"]) >= 3 and data["hashtags"]
+            data["scenes"] = [x if isinstance(x, dict) else {"prompt": x} for x in data["scenes"]][:12]
+            assert data["narration"] and len(data["scenes"]) >= 5 and data["hashtags"]
             break
         except Exception as e:
             print(f"! кривой сценарий ({type(e).__name__}), заново")
@@ -182,9 +187,9 @@ def procedural(path, seed):
         dr.ellipse([x - r, y - r, x + r, y + r], fill=tuple(min(255, v + rnd.randint(0, 25)) for v in c))
     img.filter(ImageFilter.GaussianBlur(120)).save(path)
 
-def image(prompt, path, seed):
+def image(prompt, path, seed, suffix=", dark cinematic horror photo, film grain, low key lighting, vertical 9:16, no text"):
     prov = os.getenv("IMAGE_PROVIDER", "pollinations")
-    full = prompt + ", dark cinematic horror photo, film grain, low key lighting, vertical 9:16, no text"
+    full = prompt + suffix
     try:
         if prov == "pollinations":
             url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(full)}?width={W}&height={H}&nologo=true&seed={seed}"
@@ -252,7 +257,12 @@ def main():
     script = write_script(a.topic, a.test)
     d = OUT / time.strftime("%Y%m%d_%H%M%S"); d.mkdir(parents=True)
     (d / "script.json").write_text(json.dumps(script, ensure_ascii=False, indent=1))
-    out = build(script, d)
+    if os.getenv("STYLE", "anim") == "anim":
+        import anim
+        out = anim.build(script, d, sys.modules[__name__])
+    else:
+        script["scenes"] = [x["prompt"] for x in script["scenes"]][:6]
+        out = build(script, d)
     print("готово:", out)
     if FALLBACKS:
         raise SystemExit(f"не публикую: заглушки вместо {sorted(set(FALLBACKS))}")
