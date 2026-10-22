@@ -1,25 +1,12 @@
 ! GitHub Models: JSONDecodeError HTTP 200 OK
 
 ! GitHub Models (azure): ConnectionError 
-! кривой сценарий (JSONDecodeError), заново
-! GitHub Models: JSONDecodeError HTTP 200 OK
-
-! GitHub Models (azure): ConnectionError 
-! Pollinations: KeyError HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 reply every 30 seconds per IP. Retry after 18s, or get unlimited replies with a pollen key at https://enter.
-! GitHub Models: JSONDecodeError HTTP 200 OK
-
-! GitHub Models (azure): ConnectionError 
-! картинка: HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 image every 45 seconds per I
-! картинка: HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 image every 45 seconds per I
-! картинка: HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 image every 45 seconds per I
-! картинка: HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 image every 45 seconds per I
-! картинка через pollinations не вышла (ReadTimeout) — заглушка
-! картинка: HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 image every 45 seconds per I
-! картинка: HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 image every 45 seconds per I
-! картинка: HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 image every 45 seconds per I
-! картинка: HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 image every 45 seconds per I
-! картинка через pollinations не вышла (HTTPError) — заглушка
-! картинка: HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 image every 45 seconds per I
-! картинка: HTTP 402 {"status":402,"success":false,"error":{"code":"FREE_LIMIT","message":"Free limit reached: 1 image every 45 seconds per I
-готово: /home/runner/work/temny-arkhiv/temny-arkhiv/out/20261021_203400/reel.mp4
-не публикую: заглушки вместо ['image']
+Traceback (most recent call last):
+  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 272, in <module>
+    main()
+    ~~~~^^
+  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 261, in main
+    import anim
+  File "/home/runner/work/temny-arkhiv/temny-arkhiv/anim.py", line 4, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
