@@ -1,12 +1,18 @@
 ! GitHub Models: JSONDecodeError HTTP 200 OK
 
 ! GitHub Models (azure): ConnectionError 
-Traceback (most recent call last):
-  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 272, in <module>
-    main()
-    ~~~~^^
-  File "/home/runner/work/temny-arkhiv/temny-arkhiv/make_reel.py", line 261, in main
-    import anim
-  File "/home/runner/work/temny-arkhiv/temny-arkhiv/anim.py", line 4, in <module>
-    import numpy as np
-ModuleNotFoundError: No module named 'numpy'
+! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
+! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
+! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
+! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
+! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
+! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
+! картинка: ReadTimeout
+готово: /home/runner/work/temny-arkhiv/temny-arkhiv/out/20261022_150519/reel.mp4
+remote: error: Trace: 25ff66196e4fe61393d6da739622daf6298432f665731e055aecd8309b040fe6        
+remote: error: See https://gh.io/lfs for more information.        
+remote: error: File reel.mp4 is 112.74 MB; this exceeds GitHub's file size limit of 100.00 MB        
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+To https://github.com/jivoigolf-ffdelovkorobke/temny-arkhiv.git
+ ! [remote rejected] preview -> preview (pre-receive hook declined)
+error: failed to push some refs to 'https://github.com/jivoigolf-ffdelovkorobke/temny-arkhiv.git'
