@@ -6,9 +6,11 @@ from PIL import Image, ImageDraw, ImageFilter
 
 W, H, FPS = 1080, 1920, 30
 STYLE = (", dark atmospheric horror illustration, detailed digital painting, cinematic animated film still, "
-         "volumetric god rays, light fog, rich colors, warm candle and lamp light against cold moonlight, "
-         "dramatic contrast, sharp focus, highly detailed, vertical 9:16, no text")
+         "atmospheric haze, rich colors, dramatic contrast, sharp focus, highly detailed, vertical 9:16, no text")
 FONT = "DejaVu Sans"
+PALETTES = ["warm amber lamp light and deep shadows", "cold blue night light with warm window glow",
+            "sickly green fluorescent light", "orange firelight and black shadows", "pale grey overcast daylight",
+            "deep red accent light and darkness"]
 
 def ease(x):
     x = min(max(x, 0.0), 1.0)
@@ -160,7 +162,7 @@ def build(script, d, mr):
         prompt = sc["prompt"]
         if char and sc.get("character"):
             prompt = f"{char}, {prompt}"
-        mr.image(prompt, p, random.randint(1, 10 ** 6), STYLE)
+        mr.image(prompt, p, random.randint(1, 10 ** 6), STYLE + ", " + PALETTES[i % len(PALETTES)])
         imgs.append(grade(Image.open(p)))
     scares = [cuts[i] for i, sc in enumerate(scenes) if sc.get("scare")][:2]
     subtitles(words, script.get("hook") or script["title"], d / "subs.ass", total)

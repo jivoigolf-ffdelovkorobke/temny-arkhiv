@@ -1,0 +1,771 @@
+[
+ {
+  "title": "Это не мама",
+  "hook": "Не открывай дверь",
+  "genre": "хоррор",
+  "narration": "Ей было семнадцать, родители уехали на дачу. В полночь в дверь позвонили. «Доча, открой, это мама, ключи забыла». Голос был мамин, точно. Она уже взялась за замок, но телефон завибрировал. Сообщение от мамы: «Мы с папой остались ночевать, не жди». Она посмотрела в глазок. На площадке никого. Но голос за дверью ласково повторил: «Открой. Я же вижу, что ты смотришь». Звонки продолжались до рассвета. А утром на двери нашли царапины. Изнутри квартиры.",
+  "character": "teenage girl with long dark hair in an oversized grey hoodie",
+  "scenes": [
+   {
+    "prompt": "dark apartment hallway at midnight, front door with peephole, warm lamp light from the kitchen, wide shot",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "teenage girl on a sofa looking toward the door, startled, phone glowing in her hand",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "close-up of a hand reaching for a door lock, dim warm light",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "close-up of a smartphone screen glowing in the dark with a new message notification",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "extreme close-up of an eye looking through a door peephole, cold light",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "fish-eye view through a peephole of an empty stairwell landing, flickering fluorescent lamp, green tint",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "pale thin hand pressed flat against the outside of an apartment door in a dark stairwell",
+    "character": false,
+    "scare": true
+   },
+   {
+    "prompt": "girl sitting on the floor hugging her knees in a dark hallway, door in the background, dawn light",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "close-up of deep scratch marks on the inner side of a wooden apartment door, morning light",
+    "character": false,
+    "scare": false
+   }
+  ],
+  "caption": "Голос был мамин. Вот только мама была за сто километров. Открыли бы? 👇",
+  "hashtags": [
+   "страшныеистории",
+   "хоррор",
+   "крипипаста",
+   "мистика",
+   "тёмныйархив",
+   "ужасы",
+   "страшно",
+   "reels",
+   "истории",
+   "нечисть"
+  ]
+ },
+ {
+  "title": "Тринадцатый этаж",
+  "hook": "В доме 12 этажей",
+  "genre": "хоррор",
+  "narration": "В его доме двенадцать этажей. Он проверял сам. Но в ту ночь лифт проехал двенадцатый и не остановился. Цифры на табло погасли. Двери открылись в длинный коридор, точно такой же, как у него, только все двери были заколочены. В конце коридора стоял человек и медленно махал ему рукой. Он жал на кнопку закрытия, пока не стёр палец. Лифт поехал вниз. Утром он рассказал соседям. Старушка с первого этажа побледнела и тихо спросила: «Он тебе махал? Значит, ты ему понравился».",
+  "character": "tired man in his thirties with short hair and a dark jacket",
+  "scenes": [
+   {
+    "prompt": "old Soviet apartment block at night, rain, a few lit windows, wide low angle",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "interior of an old narrow elevator, buttons panel numbered 1 to 12, flickering light",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "tired man inside an elevator staring at the floor indicator, uneasy, harsh overhead light",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "close-up of an elevator floor display going dark, red glow fading",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "elevator doors opening onto a long dim corridor with boarded-up doors, cold green light",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "distant tall dark figure at the end of a long corridor raising a hand to wave, backlit",
+    "character": false,
+    "scare": true
+   },
+   {
+    "prompt": "close-up of a finger pressing the close door button repeatedly, sweat, red light",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "old woman in a headscarf standing in a stairwell, pale and frightened, morning light",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "empty elevator doors slowly closing in a dark lobby, warm lamp",
+    "character": false,
+    "scare": false
+   }
+  ],
+  "caption": "Лифт проехал последний этаж и не остановился. Что бы вы сделали? 👇",
+  "hashtags": [
+   "страшныеистории",
+   "хоррор",
+   "крипипаста",
+   "мистика",
+   "тёмныйархив",
+   "ужасы",
+   "страшно",
+   "reels",
+   "истории",
+   "лифт"
+  ]
+ },
+ {
+  "title": "Перевал Дятлова",
+  "hook": "Палатку разрезали изнутри",
+  "genre": "тру-крайм",
+  "narration": "Февраль пятьдесят девятого. Северный Урал. Девять опытных туристов во главе с Игорем Дятловым ставят палатку на склоне горы Холатчахль. Ночью что-то заставляет их разрезать палатку изнутри и уйти вниз по склону. В мороз. Без обуви, многие почти раздетые. Их тела находят за полтора километра, у кедра и в овраге. В двадцатом году прокуратура назвала причиной сход снежной доски. Но лавина не объясняет главного: что они увидели или услышали, если предпочли верную смерть на морозе возвращению в палатку?",
+  "character": "",
+  "scenes": [
+   {
+    "prompt": "snowy mountain slope of the Northern Urals at night, blizzard, a small tent pitched on the slope, wide shot",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "group of nine hikers in 1950s winter clothing seen from behind as silhouettes, climbing a snowy ridge at dusk",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "interior of a canvas tent at night lit by a lantern, backpacks and boots, cold breath",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "close-up of a knife slicing through tent canvas from the inside, darkness outside",
+    "character": false,
+    "scare": true
+   },
+   {
+    "prompt": "footprints in the snow leading down a slope into darkness, moonlight",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "lonely giant cedar tree in a snowy forest at night, remains of a small campfire",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "old black and white case files and photos on a desk, desk lamp, 1959 Soviet documents",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "snow slab avalanche on a mountain slope at night, dramatic",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "empty collapsed tent half buried in snow under a cold dawn sky",
+    "character": false,
+    "scare": false
+   }
+  ],
+  "caption": "Девять человек ушли из палатки в мороз без обуви. Почему? Ваша версия 👇",
+  "hashtags": [
+   "трукрайм",
+   "загадки",
+   "нераскрытыедела",
+   "тайны",
+   "тёмныйархив",
+   "история",
+   "мистика",
+   "reels",
+   "расследование",
+   "перевалдятлова"
+  ]
+ },
+ {
+  "title": "Камера в спальне",
+  "hook": "Смотри на дверь",
+  "genre": "хоррор",
+  "narration": "Он поставил камеру в спальне, потому что по утрам дверь оказывалась открытой. Первую ночь запись была скучной. Но в три семнадцать дверь приоткрылась на пару сантиметров. Сама. На следующую ночь — шире. На третью — наполовину. Он сидел на кухне и перематывал запись, когда понял: каждую ночь в щели видно чуть больше темноты коридора. А на последнем кадре в этой темноте что-то блеснуло. На уровне пола. Как глаз. Сегодня четвёртая ночь. И камеру он больше не выключает.",
+  "character": "man in his late twenties with messy hair and glasses, wearing a grey t-shirt",
+  "scenes": [
+   {
+    "prompt": "dark bedroom at night seen from a high corner security camera, green night vision tint, timestamp vibe",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "man mounting a small home security camera on a bookshelf, warm desk lamp light",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "bedroom door slightly ajar in darkness, thin strip of black hallway, night vision green",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "the same bedroom door opened wider, deeper darkness behind it, grainy night vision",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "man in a kitchen at night staring at a laptop screen, face lit by cold blue light",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "close-up of a laptop screen showing grainy footage of a half-open door",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "a single glowing eye low near the floor in the dark gap of a door, night vision",
+    "character": false,
+    "scare": true
+   },
+   {
+    "prompt": "man sitting on the edge of a bed in the dark, looking at the door, red standby light of a camera",
+    "character": true,
+    "scare": false
+   }
+  ],
+  "caption": "Каждую ночь дверь открывается чуть шире. Сегодня четвёртая. 👁",
+  "hashtags": [
+   "страшныеистории",
+   "хоррор",
+   "крипипаста",
+   "мистика",
+   "тёмныйархив",
+   "ужасы",
+   "страшно",
+   "reels",
+   "истории",
+   "камера"
+  ]
+ },
+ {
+  "title": "Последняя электричка",
+  "hook": "Какая это станция?",
+  "genre": "хоррор",
+  "narration": "Последняя электричка, почти пустой вагон. Напротив села женщина в сером пальто и спросила: «Какая сейчас станция?» Он ответил. Через минуту она спросила снова. Тем же голосом. Теми же словами. Он посмотрел в окно: та же платформа, тот же фонарь, тот же человек на скамейке. Поезд шёл, а станция не менялась. Он встал, чтобы перейти в другой вагон, и женщина впервые улыбнулась: «Не уходи. Отсюда ещё никто не выходил». Его нашли утром. В депо. В вагоне, который уже десять лет не выезжал на линию.",
+  "character": "young man in a dark coat with a backpack and headphones around his neck",
+  "scenes": [
+   {
+    "prompt": "nearly empty old suburban train carriage at night, yellow lamps, rain on windows",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "young man sitting alone by the window in a train, tired, warm interior light",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "woman in a grey coat sitting opposite, face hidden in shadow, only her pale hands visible",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "view through a train window of a lonely night platform with a single street lamp and a figure on a bench",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "the identical platform again through the window, same lamp, same figure, eerie fog",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "young man standing up in the aisle, nervous, flickering lights",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "woman in a grey coat smiling unnaturally wide in a dark train carriage, cold light",
+    "character": false,
+    "scare": true
+   },
+   {
+    "prompt": "abandoned rusty train carriage in a dark depot at dawn, fog",
+    "character": false,
+    "scare": false
+   }
+  ],
+  "caption": "Станция за окном не менялась. А женщина напротив повторяла один вопрос. 🚆",
+  "hashtags": [
+   "страшныеистории",
+   "хоррор",
+   "крипипаста",
+   "мистика",
+   "тёмныйархив",
+   "ужасы",
+   "страшно",
+   "reels",
+   "истории",
+   "электричка"
+  ]
+ },
+ {
+  "title": "Тамам Шуд",
+  "hook": "Ярлыки на одежде срезаны",
+  "genre": "тру-крайм",
+  "narration": "Первое декабря сорок восьмого. Пляж Сомертон, Австралия. Утром находят мужчину в хорошем костюме. Мёртв, следов насилия нет. Документов нет, ярлыки на одежде срезаны. А в потайном кармашке брюк — клочок бумаги с двумя словами на фарси: «Тамам шуд». «Кончено». Это последняя строка из сборника Омара Хайяма. Позже находят и саму книгу. С вырванной страницей, телефоном медсестры и шифром, который не прочитан до сих пор. В двадцать втором году исследователи по ДНК назвали его имя: Карл Уэбб, инженер из Мельбурна. Но кто его убил и что означает шифр — неизвестно.",
+  "character": "",
+  "scenes": [
+   {
+    "prompt": "empty sandy beach at dawn in 1948 Australia, sea wall, soft fog, wide shot",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "silhouette of a man in a 1940s suit lying against a sea wall on a beach, no face visible, morning light",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "close-up of scissors cutting a clothing label off a 1940s jacket, dramatic lamp light",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "close-up of a tiny rolled scrap of paper with printed words, held by tweezers under a lamp",
+    "character": false,
+    "scare": true
+   },
+   {
+    "prompt": "old leather-bound poetry book with a torn-out last page on a detective's desk, lamp light",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "back cover of an old book with faint pencil letters of a cipher, magnifying glass",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "1940s police detectives examining evidence in a dim office, cigarette smoke, desk lamp",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "modern DNA lab with glowing screens and old photographs, blue light",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "lonely grave on a hill at sunset, wind, Adelaide",
+    "character": false,
+    "scare": false
+   }
+  ],
+  "caption": "Срезанные ярлыки, книга Хайяма и шифр, который не взломан 75 лет. 🔎",
+  "hashtags": [
+   "трукрайм",
+   "загадки",
+   "нераскрытыедела",
+   "тайны",
+   "тёмныйархив",
+   "история",
+   "мистика",
+   "reels",
+   "расследование",
+   "тамамшуд"
+  ]
+ },
+ {
+  "title": "Стук из-за стены",
+  "hook": "Ответь на стук",
+  "genre": "хоррор",
+  "narration": "Каждую ночь из-за стены кто-то стучал. Три раза, пауза, ещё три. Однажды она в шутку постучала в ответ. Стук сразу стал громче и быстрее, будто там обрадовались. Утром она пошла к соседям знакомиться. Управдом долго листала журнал, а потом подняла глаза: «Девушка, вы на девятом этаже, в угловой квартире. За этой стеной — улица». Той ночью стук раздался снова. Но уже не из-за стены. А из шкафа.",
+  "character": "young woman with a short bob haircut in a knitted sweater",
+  "scenes": [
+   {
+    "prompt": "small apartment bedroom at night, bed against a wallpapered wall, warm bedside lamp",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "young woman lying in bed, eyes open, listening, dim warm light",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "close-up of a knuckle knocking on a wallpapered wall, soft light",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "old woman manager with glasses leafing through a thick ledger in a dim office",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "exterior of a tall apartment block at night, one corner window on the ninth floor lit, nothing outside but air",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "young woman frozen in bed staring at a wardrobe in the dark",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "wardrobe door slightly open, pale fingers emerging from the darkness inside",
+    "character": false,
+    "scare": true
+   },
+   {
+    "prompt": "dark bedroom with the wardrobe door open, cold moonlight, empty bed",
+    "character": false,
+    "scare": false
+   }
+  ],
+  "caption": "За стеной — улица. Девятый этаж. Тогда кто стучит? 👇",
+  "hashtags": [
+   "страшныеистории",
+   "хоррор",
+   "крипипаста",
+   "мистика",
+   "тёмныйархив",
+   "ужасы",
+   "страшно",
+   "reels",
+   "истории",
+   "соседи"
+  ]
+ },
+ {
+  "title": "Звонок с моего номера",
+  "hook": "Звонят с твоего номера",
+  "genre": "хоррор",
+  "narration": "В час ночи мне позвонили. На экране был мой собственный номер. Я ответил. В трубке было тихо, только дыхание и шум, как будто человек идёт по улице. Потом голос. Мой голос. «Не ходи завтра на работу пешком. Слышишь? Езжай на автобусе». И гудки. Я решил, что это розыгрыш, и утром пошёл пешком. На перекрёстке у моего дома в ту минуту, когда я обычно там прохожу, грузовик вылетел на тротуар. Я стоял в десяти метрах. А телефон в кармане снова зазвонил. Мой номер.",
+  "character": "man in his thirties with a short beard in a dark hoodie",
+  "scenes": [
+   {
+    "prompt": "dark bedroom at 1 am, smartphone lighting up on a nightstand, cold blue glow",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "close-up of a phone screen showing an incoming call, glowing in darkness",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "man sitting up in bed holding a phone to his ear, frightened, blue phone light",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "empty night street with wet asphalt and fog, seen as if someone is walking, street lamps",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "man walking along a city sidewalk in the morning, grey overcast, headphones",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "truck headlights blazing at an intersection, motion blur, dramatic",
+    "character": false,
+    "scare": true
+   },
+   {
+    "prompt": "man standing frozen on a sidewalk, debris and dust in front of him, morning haze",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "close-up of a phone vibrating in a jacket pocket, screen glowing",
+    "character": false,
+    "scare": false
+   }
+  ],
+  "caption": "Мне позвонили с моего же номера. И спасли жизнь. Или нет? 📱",
+  "hashtags": [
+   "страшныеистории",
+   "хоррор",
+   "крипипаста",
+   "мистика",
+   "тёмныйархив",
+   "ужасы",
+   "страшно",
+   "reels",
+   "истории",
+   "звонок"
+  ]
+ },
+ {
+  "title": "Мария Селеста",
+  "hook": "Корабль без экипажа",
+  "genre": "тру-крайм",
+  "narration": "Декабрь тысяча восемьсот семьдесят второго. Между Азорскими островами и Португалией моряки замечают бригантину «Мария Селеста». Она идёт неровно, никто не стоит у штурвала. Поднимаются на борт — ни души. Запасов еды и воды на полгода. Личные вещи экипажа на месте. Груз, больше тысячи семисот бочек спирта, почти не тронут. Пропала только спасательная шлюпка. Десять человек добровольно покинули крепкий корабль посреди океана и исчезли навсегда. От чего можно бежать в открытое море?",
+  "character": "",
+  "scenes": [
+   {
+    "prompt": "19th century brigantine sailing alone on a grey stormy Atlantic, torn sails, wide shot",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "sailors on another ship looking through a brass telescope, overcast sky",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "empty ship deck with an unattended spinning wheel, sea spray, dramatic clouds",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "captain's cabin of an old ship, belongings in place, a cup on the table, dim lantern light",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "dark ship hold with rows of wooden barrels, lantern light, water on the floor",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "empty ropes and davits where a lifeboat used to hang, foggy sea",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "tiny lifeboat with silhouettes on a vast dark ocean at night, storm approaching",
+    "character": false,
+    "scare": true
+   },
+   {
+    "prompt": "abandoned ghost ship drifting in fog at dusk, eerie",
+    "character": false,
+    "scare": false
+   }
+  ],
+  "caption": "Еда на полгода, вещи на месте, а экипаж исчез. Что случилось на «Марии Селесте»? ⚓",
+  "hashtags": [
+   "трукрайм",
+   "загадки",
+   "нераскрытыедела",
+   "тайны",
+   "тёмныйархив",
+   "история",
+   "мистика",
+   "reels",
+   "расследование",
+   "кораблипризраки"
+  ]
+ },
+ {
+  "title": "Кукла на чердаке",
+  "hook": "Она поменяла позу",
+  "genre": "хоррор",
+  "narration": "Мы разбирали чердак бабушкиного дома и нашли фарфоровую куклу. Сидела в углу, лицом к стене. Странно, но ладно. Мы её развернули и спустились пить чай. Через час я поднялся за коробками. Кукла снова сидела лицом к стене. Я спросил брата — он клялся, что не трогал. Мы закрыли чердак на ключ. Ночью сверху раздались шаги. Маленькие, лёгкие. Утром брат открыл чердак и молча позвал меня. Кукла сидела у самой двери. Лицом к нам. Бабушка, когда узнала, заплакала: «Зачем вы её повернули? Она же так никого не видела».",
+  "character": "",
+  "scenes": [
+   {
+    "prompt": "old wooden village house at dusk, attic window, warm light inside, fog around",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "dusty attic with old trunks and boxes, warm flashlight beam, dust in the air",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "antique porcelain doll in a lace dress sitting in a corner facing the wall, dim light",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "two brothers in their twenties climbing down a narrow attic ladder, warm light",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "the porcelain doll again facing the wall in the dark attic corner, cold moonlight",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "old wooden attic door locked with a big rusty key, night",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "porcelain doll sitting right at an attic door, cracked face looking straight at the viewer, eerie light",
+    "character": false,
+    "scare": true
+   },
+   {
+    "prompt": "old grandmother crying at a kitchen table, candle light",
+    "character": false,
+    "scare": false
+   }
+  ],
+  "caption": "Кукла сидела лицом к стене не просто так. Вы бы её повернули? 🎎",
+  "hashtags": [
+   "страшныеистории",
+   "хоррор",
+   "крипипаста",
+   "мистика",
+   "тёмныйархив",
+   "ужасы",
+   "страшно",
+   "reels",
+   "истории",
+   "кукла"
+  ]
+ },
+ {
+  "title": "Маяк Фланнан",
+  "hook": "Маяк погас",
+  "genre": "тру-крайм",
+  "narration": "Декабрь тысяча девятисотого года. Остров Эйлен-Мор, Шотландия. С проходящего судна замечают, что маяк не горит. Через десять дней к острову приходит смена. На причале никого. Дверь закрыта, лампа вычищена и заправлена, будто к ночи. Но трёх смотрителей нет. Два непромокаемых плаща исчезли. Третий висит на крючке, значит один из мужчин вышел в декабрьский шторм без плаща. На западном причале стихия сорвала ящик, закреплённый на высоте больше тридцати метров. Тела так и не нашли.",
+  "character": "",
+  "scenes": [
+   {
+    "prompt": "lonely lighthouse on a rocky Scottish island at night, dark, no light, stormy sea, wide shot",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "steamship approaching a rocky island in grey morning fog",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "empty stone landing pier with huge waves crashing, overcast",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "interior of an old lighthouse keeper's room, table set, dim cold light through a small window",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "brass lighthouse lamp cleaned and ready, polished glass prisms, eerie glow",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "single oilskin coat hanging alone on a hook by a door, two empty hooks, dim light",
+    "character": false,
+    "scare": true
+   },
+   {
+    "prompt": "giant storm wave hitting a high cliff, spray reaching very high, dramatic",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "lighthouse silhouette at dusk with dark clouds, solitary",
+    "character": false,
+    "scare": false
+   }
+  ],
+  "caption": "Трое смотрителей исчезли с острова. Один ушёл без плаща в шторм. Почему? 🌊",
+  "hashtags": [
+   "трукрайм",
+   "загадки",
+   "нераскрытыедела",
+   "тайны",
+   "тёмныйархив",
+   "история",
+   "мистика",
+   "reels",
+   "расследование",
+   "маяк"
+  ]
+ },
+ {
+  "title": "Ди Би Купер",
+  "hook": "Он прыгнул и исчез",
+  "genre": "тру-крайм",
+  "narration": "Двадцать четвёртое ноября семьдесят первого. Рейс Портленд — Сиэтл. Мужчина в костюме и тёмных очках передаёт стюардессе записку: «У меня в портфеле бомба». Он требует двести тысяч долларов и четыре парашюта. В Сиэтле получает всё и отпускает пассажиров. Самолёт снова взлетает. Ночью, в дождь, над лесами штата Вашингтон он открывает задний трап и прыгает. Больше его никто не видел. Через девять лет на берегу реки Колумбия нашли пачки сгнивших купюр из выкупа. Почти шесть тысяч. Остальные деньги и он сам — исчезли. ФБР закрыло дело в шестнадцатом году.",
+  "character": "man in a dark 1970s business suit, white shirt, thin black tie and dark sunglasses, face not shown clearly",
+  "scenes": [
+   {
+    "prompt": "1970s passenger jet on a rainy runway at night, airport lights, wide shot",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "man in a 1970s suit with sunglasses sitting in an airplane seat, seen from the side in shadow",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "close-up of a handwritten note passed to a flight attendant's hand, cabin light",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "open briefcase with red wires and cylinders inside, dramatic lamp light",
+    "character": false,
+    "scare": true
+   },
+   {
+    "prompt": "bundles of 1970s twenty dollar bills and parachute packs on an airport table",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "open rear airstairs of a jet in flight at night, rain and wind rushing in",
+    "character": true,
+    "scare": false
+   },
+   {
+    "prompt": "dark rainy forest seen from above at night, a tiny parachute disappearing into clouds",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "decayed bundles of old money in wet sand on a river bank, overcast",
+    "character": false,
+    "scare": false
+   },
+   {
+    "prompt": "FBI case files and sketches on a desk, desk lamp, 1970s",
+    "character": false,
+    "scare": false
+   }
+  ],
+  "caption": "Угнал самолёт, получил выкуп, прыгнул в ночь — и исчез навсегда. 🪂",
+  "hashtags": [
+   "трукрайм",
+   "загадки",
+   "нераскрытыедела",
+   "тайны",
+   "тёмныйархив",
+   "история",
+   "мистика",
+   "reels",
+   "расследование",
+   "дибикупер"
+  ]
+ }
+]

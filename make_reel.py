@@ -106,6 +106,13 @@ def write_script(topic=None, test=False):
     if test:
         return dict(FALLBACK, scenes=[{"prompt": x, "scare": i == 3} for i, x in enumerate(FALLBACK["scenes"])],
                     hook="Голос в радионяне")
+    bank_f = ROOT / "scripts_bank.json"  # готовые выверенные сценарии идут первыми
+    if bank_f.exists() and not topic:
+        for b in json.loads(bank_f.read_text()):
+            if b["title"] not in used:
+                used.append(b["title"])
+                hist_f.write_text(json.dumps(used, ensure_ascii=False, indent=1))
+                return b
     genre = topic or ("хоррор" if random.random() < 0.6 else "тру-крайм")
     theme = ""
     if genre == "тру-крайм":
@@ -206,7 +213,7 @@ def image(prompt, path, seed, suffix=", dark cinematic horror photo, film grain,
     try:
         if prov == "pollinations":
             url = f"https://image.pollinations.ai/prompt/{urllib.parse.quote(full)}?width={W}&height={H}&nologo=true&seed={seed}"
-            for attempt in range(4):
+            for attempt in range(7):
                 time.sleep(50)  # бесплатный лимит Pollinations: 1 картинка в 45 с
                 try:
                     r = requests.get(url, timeout=300)
