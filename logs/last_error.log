@@ -2,8 +2,7 @@
 ! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
 ! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
 ! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
-! картинка: HTTP 503 {"status":503,"success":false,"error":{"code":"SERVICE_UNAVAILABLE","message":"The Classic API is at its limit right now
-готово: /home/runner/work/temny-arkhiv/temny-arkhiv/out/20261027_173648/reel.mp4
+готово: /home/runner/work/temny-arkhiv/temny-arkhiv/out/20261028_063426/reel.mp4
 Traceback (most recent call last):
   File "/home/runner/work/temny-arkhiv/temny-arkhiv/post_instagram.py", line 41, in <module>
     print("опубликовано, id:", publish(sys.argv[1], Path(sys.argv[2]).read_text(encoding="utf-8")))
@@ -11,4 +10,4 @@ Traceback (most recent call last):
   File "/home/runner/work/temny-arkhiv/temny-arkhiv/post_instagram.py", line 29, in publish
     if "id" not in c: raise RuntimeError(c)
                       ^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: {'error': {'message': 'API access blocked.', 'type': 'OAuthException', 'code': 200, 'fbtrace_id': 'Ao-223GWXVXIkGPJfEnUSYE'}}
+RuntimeError: {'error': {'message': 'API access blocked.', 'type': 'OAuthException', 'code': 200, 'fbtrace_id': 'AOK0hy8f-5EBQmmfXE5AA4N'}}
